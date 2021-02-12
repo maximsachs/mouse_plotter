@@ -1,0 +1,4 @@
+__pycache__/
+.pytest_cache/
+images/*
+!images/doge3.jpeg
