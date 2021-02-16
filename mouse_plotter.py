@@ -53,7 +53,7 @@ if draw_border:
     m.drag(top_left[0], top_left[1])
     time.sleep(sleep_time)
 
-img = Image.open(image_file)
+img = Image.open(os.path.join("images", image_file))
 # Making image bw:
 thresh = 200
 fn = lambda x : 255 if x > thresh else 0
@@ -100,3 +100,9 @@ elif draw_mode == "lines":
                 m.drag(top_left[0]+(x*brush_size_pixels), top_left[1]+(y*brush_size_pixels))
                 time.sleep(sleep_time)
                 line_start = False
+        # Edge case of having no white pixel until the end:
+        if line_start:
+            m.move(top_left[0]+(line_start*brush_size_pixels), top_left[1]+(y*brush_size_pixels))
+            m.drag(top_left[0]+(x*brush_size_pixels), top_left[1]+(y*brush_size_pixels))
+            time.sleep(sleep_time)
+            line_start = False
